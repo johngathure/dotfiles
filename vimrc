@@ -1,69 +1,92 @@
 " - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/development/.nvim/plugged')
-
-" Make sure you use single quotes
+call plug#begin('~/code/.nvim/plugged')
 
 " Python mode
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 
-" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
+" Directory tree structure
 Plug 'scrooloose/nerdtree'
+
+" Comment code
 Plug 'scrooloose/nerdcommenter'
 Plug 'jistr/vim-nerdtree-tabs'
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tmhedberg/SimpylFold'
-Plug 'vim-scripts/indentpython.vim'
-" Plugin 'scrooloose/syntastic'
-Plug 'nvie/vim-flake8'
-Plug 'jnurmine/Zenburn'
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
-Plug 'altercation/vim-colors-solarized'
 
+" color schemes.
+Plug 'jnurmine/Zenburn'
+Plug 'flazz/vim-colorschemes'
+Plug 'altercation/vim-colors-solarized'
+Plug 'dracula/vim'
+
+" git
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fugitive-blame-ext'
-Plug 'airblade/vim-gitgutter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'idanarye/vim-merginal'
 
+" rust
 Plug 'rust-lang/rust.vim'
 
-Plug 'tpope/vim-surround'
-Plug 'flazz/vim-colorschemes'
+" go
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+
+Plug 'tpope/vim-surround'
+Plug 'mattn/emmet-vim'
+
+" js 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'millermedeiros/vim-esformatter'
-Plug 'mattn/emmet-vim'
-" Plug 'junegunn/fzf'
+
+" search
 Plug 'rking/ag.vim'
-Plug 'dracula/vim'
+
+" maximize splits
 Plug 'szw/vim-maximizer'
-Plug 'avakhov/vim-yaml'
-Plug 'idanarye/vim-merginal'
-Plug 'neomake/neomake'
+
+" yml
+Plug 'stephpy/vim-yaml'
+
+" tagbar.
 Plug 'majutsushi/tagbar'
 
 Plug 'Valloric/MatchTagAlways'
+
+" auto complete
 Plug 'Valloric/YouCompleteMe'
+
+" Python auto formater
+Plug 'ambv/black'
+
+" Docker
+Plug 'ekalinin/Dockerfile.vim'
+
+" scss
+Plug 'cakebaker/scss-syntax.vim'
+
+" syntax checking
+Plug 'w0rp/ale'
+
+" splash screen
+Plug 'mhinz/vim-startify'
+
+Plug 'christoomey/vim-tmux-navigator'
 
 " Initialize plugin system
 call plug#end()
 
-let g:python3_host_prog = '/usr/local/bin/python3'
+set encoding=utf-8
+syntax on
 
-" Pyhton mode setup
-let g:pymode_python = 'python3'
+let mapleader = "\<Space>"
 
 filetype plugin indent on    " required
-
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set softtabstop=4
 
 " Automatically update a file if it is changed externally
 set autoread
@@ -98,36 +121,24 @@ au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 " enable spell-checking for markdown files
 autocmd BufRead,BufNewFile *.md setlocal spell
 
-" " Enables syntax highlighting for JSDocs.
-" let g:javascript_plugin_jsdoc = 1
-"
-" " Enables some additional syntax highlighting for NGDocs.
-" let g:javascript_plugin_ngdoc = 1
-"
-" " Enables syntax highlighting for Flow.
-" let g:javascript_plugin_flow = 1
-"
-" " Allow JSX in normal JS Files
-" let g:jsx_ext_required = 0
-"
-" " configure Syntastic to use ESLint
-" let g:syntastic_javascript_checkers = ['eslint']
-"
-" " configure Syntastic to use PSlint for python
-" let g:syntastic_python_checkers = ['pylint']
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
 
-" Enable folding with the spacebar
-nnoremap <space> za
-let g:SimpylFold_docstring_preview=1
+" Turn hybrid numbers on
+set nu                  " display line numbers
+set nu rnu
 
-" Number of spaces that a pre-existing tab is equal to.
-au BufRead,BufNewFile *py,*pyw,*.c,*.h,*.js,*.go set tabstop=4
 
-"spaces for indents
-au BufRead,BufNewFile *.py,*pyw,*.js,*.go set shiftwidth=4
-au BufRead,BufNewFile *.py,*.pyw,*.js,*.go set expandtab
-au BufRead,BufNewFile *.py,*.js,*.go set softtabstop=4
+set clipboard+=unnamed  " use the clipboards of vim and win
+set go+=a               " Visual selection automatically copied to the clipboard
 
+
+" Always show statusline
+set laststatus=2
+
+" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+set t_Co=256
 
 highlight BadWhitespace ctermbg=red guibg=red
 
@@ -140,79 +151,67 @@ au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 " Use UNIX (\n) line endings.
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 
-
-let python_highlight_all=1
-syntax on
-
-
-set encoding=utf-8
-
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
 " make backspaces more powerfull
 set backspace=indent,eol,start
 
-" colorscheme SlateDark
+" disable arrow keys in normal mode.
+no <down> <Nop>
+no <left> <Nop>
+no <right> <Nop>
+no <up> <Nop>
 
-" VIM COLORS SOLARIZED
-" syntax enable
-" set background=dark
-" let g:solarized_termcolors=256
-" colorscheme solarized
-" call togglebg#map("<F5>")
+ino <down> <Nop>
+ino <left> <Nop>
+ino <right> <Nop>
+ino <up> <Nop>
+
+" SPLIT SCREEN NAVIGATION
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+
+" PLUGINS CONFIG
+
+" Pyhton mode setup
+let g:python3_host_prog = '/usr/local/bin/python3.7'
+let g:pymode = 1
+let g:pymode_python = 'python3'
+let g:pymode_lint_cwindow = 0
+let python_highlight_all=1
+
+" simple fold
+nnoremap <space> za
+let g:SimpylFold_docstring_preview=1
+
+" you complete me
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+
 
 " Dracula
 syntax on
 color dracula
 
 
-
 " NERD TREE TAB
-" open nerd tree when vim is launched
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
 " Shortcut for opening nerd tree
 map <C-n> :NERDTreeToggle<CR>
-
-" Close nerd tree automatically when a file is opened
+"
+" " Close nerd tree automatically when a file is opened
 let NERDTreeQuitOnOpen = 1
-
-" Automatically delete the buffer of the just deleted file
+"
+" " Automatically delete the buffer of the just deleted file
 let NERDTreeAutoDeleteBuffer = 1
-
-" remove the stupid old `Press ? for help 
-" and the niusance arrows
+"
+" " remove the stupid old `Press ? for help
+" " and the niusance arrows
 let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
 
-" ignore python compiled files
+" " ignore python compiled files
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-
-
-" Turn hybrid numbers on
-set nu                  " display line numbers
-set nu rnu
-
-
-set clipboard+=unnamed  " use the clipboards of vim and win
-set go+=a               " Visual selection automatically copied to the clipboard
-
-
-" Powerline
-" set rtp+=/development/.vim/bundle/powerline/powerline/bindings/vim/
-
-" Always show statusline
-set laststatus=2
-
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
-
-" set termencoding=utf-8
-" set guifont=Ubuntu\ Mono\ derivative\ Powerline:10
-" set guifont=Ubuntu\ Mono
-" let g:Powerline_symbols = 'fancy'
 
 
 
@@ -241,27 +240,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_generate_tags = 1
 
-" emmet-vim
-" Enable just for html/css
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-
-" disable arrow keys in normal mode.
-no <down> <Nop>
-no <left> <Nop>
-no <right> <Nop>
-no <up> <Nop>
-
-ino <down> <Nop>
-ino <left> <Nop>
-ino <right> <Nop>
-ino <up> <Nop>
-
-" SPLIT SCREEN NAVIGATION
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
 " PYTHON VIRTUALENV SUPPORT
 py3 << EOF
@@ -273,43 +251,30 @@ if 'VIRTUAL_ENV' in os.environ:
         sys.path.insert(0, str(site_packages))
 EOF
 
-" CTRLP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_cmd = 'CtrlPLastMode'
-let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-" Set no max file limit
-let g:ctrlp_max_files = 0
-" Search from current directory instead of project root
-let g:ctrlp_working_path_mode = 0
-
-" AG
+	" AG
 let g:ag_working_path_mode="r"
 
 nnoremap <silent> K :call SearchWordWithAg()<CR>
 vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
 
 function! SearchWordWithAg()
-  execute 'Ag' expand('<cword>')
+    execute 'Ag' expand('<cword>')
 endfunction
 
 function! SearchVisualSelectionWithAg() range
-  let old_reg = getreg('"')
-  let old_regtype = getregtype('"')
-  let old_clipboard = &clipboard
-  set clipboard&
-  normal! ""gvy
-  let selection = getreg('"')
-  call setreg('"', old_reg, old_regtype)
-  let &clipboard = old_clipboard
-  execute 'Ag' selection
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
+    let old_clipboard = &clipboard
+    set clipboard&
+    normal! ""gvy
+    let selection = getreg('"')
+    call setreg('"', old_reg, old_regtype)
+    let &clipboard = old_clipboard
+    execute 'Ag' selection
 endfunction
 
 " C TAGS
 set tags=tags
-
-" FZF
-set rtp+=/usr/local/opt/fzf
 
 " NERD COMMENT
 " Add spaces after comment delimiters by default
@@ -333,42 +298,19 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-"
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" Ignore for python files as pymode plugin
-let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
-" let g:syntastic_python_checkers = ['pylint']
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-"
 " Difference btwn buffer and unmodified version on disk
 function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+    let filetype=&ft
+    diffthis
+    vnew | r # | normal! 1Gdd
+    diffthis
+    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
-" Py mode
-let g:pymode_python = 'python3'
-let g:pymode_lint_cwindow = 0
 
-" NeoMake
-call neomake#configure#automake('nrwi', 500)
-" let g:neomake_open_list = 2
-"
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
-
-" airline
-let g:airline_powerline_fonts = 1 
 
 " fzf
 set rtp+=/usr/local/opt/fzf
