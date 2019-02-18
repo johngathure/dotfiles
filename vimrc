@@ -26,6 +26,7 @@ Plug 'dracula/vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'tpope/vim-rhubarb'
 Plug 'idanarye/vim-merginal'
 
 " rust
