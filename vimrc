@@ -306,7 +306,6 @@ com! DiffSaved call s:DiffWithSaved()
 nmap <F8> :TagbarToggle<CR>
 
 " fzf
-set rtp+=/usr/local/opt/fzf
 " In Neovim, you can set up fzf window using a Vim command
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
