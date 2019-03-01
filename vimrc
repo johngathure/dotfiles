@@ -79,6 +79,13 @@ Plug 'mhinz/vim-startify'
 " vim tmux seem-less navigation
 Plug 'christoomey/vim-tmux-navigator'
 
+" vim lorem ipsum generator.
+Plug 'vim-scripts/loremipsum'
+
+" fzf
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
 " Initialize plugin system
 call plug#end()
 
