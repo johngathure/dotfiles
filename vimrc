@@ -76,6 +76,7 @@ Plug 'w0rp/ale'
 " splash screen
 Plug 'mhinz/vim-startify'
 
+" vim tmux seem-less navigation
 Plug 'christoomey/vim-tmux-navigator'
 
 " Initialize plugin system
