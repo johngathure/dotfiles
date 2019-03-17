@@ -89,6 +89,9 @@ Plug 'junegunn/fzf.vim'
 " limelight
 Plug 'junegunn/limelight.vim'
 
+" bash support.
+Plug 'vim-scripts/bash-support.vim'
+
 " Initialize plugin system
 call plug#end()
 
