@@ -86,6 +86,9 @@ Plug 'vim-scripts/loremipsum'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
+" limelight
+Plug 'junegunn/limelight.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -366,3 +369,10 @@ nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 " nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+" limelight
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+nmap <Leader>l <Plug>(Limelight)
+xmap <Leader>l <Plug>(Limelight)
