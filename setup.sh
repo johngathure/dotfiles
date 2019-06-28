@@ -41,6 +41,11 @@ fi
 shopt -u nocasematch
 
 # setup tmux conf.
-echo "${BOLD}Creating system link $(pwd)/tmux.conf > ${HOMEDIR}/.tmux.conf${NORM}"
+echo "${BOLD}Creating system link $(pwd)/tmux.conf -> ${HOMEDIR}/.tmux.conf${NORM}"
 ln -sf $(pwd)/tmux.conf ${HOMEDIR}/.tmux.conf
+echo "${GREEN}Successfully created system link${NORM}"
+
+# setup git config
+echo "${BOLD}Creating system link $(pwd)/gitconfig -> ${HOMEDIR}/.gitconfig${NORM}"
+ln -sf $(pwd)/gitconfig ${HOMEDIR}/.gitconfig
 echo "${GREEN}Successfully created system link${NORM}"
