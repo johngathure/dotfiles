@@ -24,14 +24,14 @@ then
 elif [[ $editor == "VI" ]]
 then
     echo "${BOLD}Creating system link $(pwd)/vimrc -> $HOMEDIR/.vimrc${NORM}"
-    ln -sf $(pwd)/vimrc $HOMEDIR/.vimrc
+    ln -sf $(pwd)/.vimrc $HOMEDIR/.vimrc
     echo "${GREEN}Successfully created system link${NORM}"
 elif [[ $editor == "NVI" ]]
 then 
 
     echo "${BOLD}Creating system link $(pwd)/vimrc -> ${HOMEDIR}/.config/nvim/init.vim${NORM}"
     [ -d $HOMEDIR/.config/nvim ] || mkdir -p $HOMEDIR/.config/nvim
-    ln -sf $(pwd)/vimrc $HOMEDIR/.config/nvim/init.vim
+    ln -sf $(pwd)/.vimrc $HOMEDIR/.config/nvim/init.vim
     echo "${GREEN}Successfully created system link${NORM}"
 else
     echo -e "${RED}Incorrect input${NORM}\a"
@@ -42,10 +42,10 @@ shopt -u nocasematch
 
 # setup tmux conf.
 echo "${BOLD}Creating system link $(pwd)/tmux.conf -> ${HOMEDIR}/.tmux.conf${NORM}"
-ln -sf $(pwd)/tmux.conf ${HOMEDIR}/.tmux.conf
+ln -sf $(pwd)/.tmux.conf ${HOMEDIR}/.tmux.conf
 echo "${GREEN}Successfully created system link${NORM}"
 
 # setup git config
 echo "${BOLD}Creating system link $(pwd)/gitconfig -> ${HOMEDIR}/.gitconfig${NORM}"
-ln -sf $(pwd)/gitconfig ${HOMEDIR}/.gitconfig
+ln -sf $(pwd)/.gitconfig ${HOMEDIR}/.gitconfig
 echo "${GREEN}Successfully created system link${NORM}"
