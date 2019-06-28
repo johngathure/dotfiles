@@ -4,22 +4,22 @@
     username = johngathure
 [alias]
     # status
-	st = status
+    st = status
     sb = status -s -b
 
     # checkout
-	o = checkout
+    o = checkout
     om = checkout master
     ob = checkout -b
 
     # branch
-	br = branch
+    br = branch
     bra = branch -a
     brd = branch -d
     brdd = branch -D
 
     # commit
-	c = commit
+    c = commit
     ca = commit --amend
     ce = commit --amend --no-edit
 
