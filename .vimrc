@@ -28,6 +28,7 @@ Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'idanarye/vim-merginal'
+Plug 'junegunn/gv.vim'
 
 " rust
 Plug 'rust-lang/rust.vim'
