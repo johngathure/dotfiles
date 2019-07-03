@@ -4,8 +4,8 @@
     username = johngathure
 [alias]
     # status
-    st = status
-    sb = status -s -b
+    sts = status
+    stsb = status -s -b
 
     # checkout
     o = checkout
@@ -49,7 +49,7 @@
 
     # pull
     pl = pull
-    pb = pull --rebase
+    plb = pull --rebase
 
     # rebase
     rb = rebase
@@ -59,18 +59,19 @@
     rbs = rebase --skip
 
     # reset
-    re = reset
-    rh = reset HEAD
-    reh = reset --hard
-    res = reset --soft
+    rse = reset
+    rsh = reset HEAD
+    rseh = reset --hard
+    rses = reset --soft
 
     # stash
-    sa = stash apply
-    sc = stash clear
-    sd = stash drop
-    sl = stash list
-    sp = stash pop
-    sw = stash show
+    st = stash
+    sta = stash apply
+    stc = stash clear
+    std = stash drop
+    stl = stash list
+    stp = stash pop
+    stw = stash show
 
 [push]
     default = upstream
