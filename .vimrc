@@ -29,6 +29,7 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'idanarye/vim-merginal'
 Plug 'junegunn/gv.vim'
+Plug 'rhysd/git-messenger.vim'
 
 " rust
 Plug 'rust-lang/rust.vim'
@@ -92,6 +93,9 @@ Plug 'junegunn/limelight.vim'
 
 " bash support.
 Plug 'vim-scripts/bash-support.vim'
+
+" scratch. Window for notes taking
+Plug 'mtth/scratch.vim'
 
 " Initialize plugin system
 call plug#end()
