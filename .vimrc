@@ -396,3 +396,6 @@ xmap <Leader>l <Plug>(Limelight)
 
 " hardtime
 let g:hardtime_default_on = 1
+
+" F2 to return path to file.
+map <F2> :echo @% <CR>
