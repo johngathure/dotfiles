@@ -97,6 +97,15 @@ Plug 'vim-scripts/bash-support.vim'
 " scratch. Window for notes taking
 Plug 'mtth/scratch.vim'
 
+" navigate and highlight matching words.
+Plug 'andymass/vim-matchup'
+
+" indents
+Plug 'thaerkh/vim-indentguides'
+
+" Plugin to stop me from repeating keystrokes.
+Plug 'takac/vim-hardtime'
+
 " Initialize plugin system
 call plug#end()
 
@@ -384,3 +393,6 @@ let g:limelight_conceal_ctermfg = 240
 
 nmap <Leader>l <Plug>(Limelight)
 xmap <Leader>l <Plug>(Limelight)
+
+" hardtime
+let g:hardtime_default_on = 1
