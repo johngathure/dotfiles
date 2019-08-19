@@ -101,7 +101,7 @@ Plug 'mtth/scratch.vim'
 Plug 'andymass/vim-matchup'
 
 " indents
-Plug 'thaerkh/vim-indentguides'
+" Plug 'thaerkh/vim-indentguides'
 
 " Plugin to stop me from repeating keystrokes.
 Plug 'takac/vim-hardtime'
@@ -396,6 +396,9 @@ xmap <Leader>l <Plug>(Limelight)
 
 " hardtime
 let g:hardtime_default_on = 1
+let g:hardtime_timeout = 2000
+let g:hardtime_ignore_buffer_patterns = ["NERD.*", "index"]
+let g:hardtime_allow_different_key = 1
 
 " F2 to return path to file.
 map <F2> :echo @% <CR>
