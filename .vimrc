@@ -203,6 +203,11 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" search
+" use case insensitive search by default
+set ignorecase 
+" use case sensitive search, if the search term contains uppercase characters
+set smartcase  
 
 " PLUGINS CONFIG
 
