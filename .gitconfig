@@ -72,6 +72,8 @@
     stl = stash list
     stp = stash pop
     stw = stash show
+    stk = stash -k  # stash only unstaged files. Keep staged files.
+    stku = stash -k -u  # stash newly created untracked files also.
 
     # log
     lg = log
