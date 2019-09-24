@@ -209,6 +209,11 @@ set ignorecase
 " use case sensitive search, if the search term contains uppercase characters
 set smartcase  
 
+" improve scrolling performance and render performance
+set ttyfast
+" delay rendering for fewer renders, generally improves performance
+set lazyredraw
+
 " PLUGINS CONFIG
 
 " Pyhton mode setup
