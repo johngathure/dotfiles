@@ -205,14 +205,21 @@ nnoremap <C-H> <C-W><C-H>
 
 " search
 " use case insensitive search by default
-set ignorecase 
+set ignorecase
 " use case sensitive search, if the search term contains uppercase characters
-set smartcase  
+set smartcase
 
 " improve scrolling performance and render performance
 set ttyfast
 " delay rendering for fewer renders, generally improves performance
 set lazyredraw
+
+" don't wrap lines
+set nowrap
+
+" Show hidden characters, useful on indentation.
+set list
+" set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
 
 " PLUGINS CONFIG
 
@@ -412,3 +419,7 @@ let g:hardtime_allow_different_key = 1
 
 " F2 to return path to file.
 map <F2> :echo @% <CR>
+
+" Quickly edit/reload this configuration file
+nnoremap gev :e $MYVIMRC<CR>
+nnoremap gsv :so $MYVIMRC<CR>
