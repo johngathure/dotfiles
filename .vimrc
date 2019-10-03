@@ -343,11 +343,6 @@ com! DiffSaved call s:DiffWithSaved()
 nmap <F8> :TagbarToggle<CR>
 
 " fzf
-" In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
-let g:fzf_layout = { 'window': '10split enew' }
-
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
@@ -369,8 +364,41 @@ let g:fzf_colors =
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-nnoremap <c-p> :FZF<CR>
 
+" Reverse the layout to make the FZF list top-down
+let $FZF_DEFAULT_OPTS='--layout=reverse'
+
+" Using the custom window creation function
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+" Function to create the custom floating window
+function! FloatingFZF()
+  " creates a scratch, unlisted, new, empty, unnamed buffer
+  " to be used in the floating window
+  let buf = nvim_create_buf(v:false, v:true)
+
+  " 90% of the height
+  let height = float2nr(&lines * 0.9)
+  " 60% of the height
+  let width = float2nr(&columns * 0.6)
+  " horizontal position (centralized)
+  let horizontal = float2nr((&columns - width) / 2)
+  " vertical position (one line down of the top)
+  let vertical = 1
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height
+        \ }
+
+  " open the new window, floating, and enter to it
+  call nvim_open_win(buf, v:true, opts)
+endfunction
+
+nnoremap <c-p> :FZF<CR>
 
 " emmet vim
 let g:user_emmet_leader_key=','
