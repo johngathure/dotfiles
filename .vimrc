@@ -224,7 +224,7 @@ set list
 " PLUGINS CONFIG
 
 " Pyhton mode setup
-let g:python3_host_prog = '/usr/local/bin/python3.6'
+let g:python3_host_prog = '/usr/local/bin/python3'
 let g:pymode = 1
 let g:pymode_python = 'python3'
 let g:pymode_lint_cwindow = 0
