@@ -106,6 +106,11 @@ Plug 'andymass/vim-matchup'
 " Plugin to stop me from repeating keystrokes.
 Plug 'takac/vim-hardtime'
 
+" Kotlin
+Plug 'udalov/kotlin-vim'
+Plug 'Shadowsith/kotlincomplete.vim'
+
+
 " Initialize plugin system
 call plug#end()
 
