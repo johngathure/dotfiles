@@ -110,6 +110,9 @@ Plug 'takac/vim-hardtime'
 Plug 'udalov/kotlin-vim'
 Plug 'Shadowsith/kotlincomplete.vim'
 
+" Terraform
+Plug 'hashivim/vim-terraform'
+
 
 " Initialize plugin system
 call plug#end()
@@ -456,3 +459,8 @@ map <F2> :echo @% <CR>
 " Quickly edit/reload this configuration file
 nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC<CR>
+
+" Vim terraform.
+let g:terraform_align=1
+let g:terraform_fold_sections=1
+let g:terraform_fmt_on_save=1
