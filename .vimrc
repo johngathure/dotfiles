@@ -197,6 +197,13 @@ set nowrap
 " Show hidden characters, useful on indentation.
 set list
 set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
+" Number of milliseconds that vim waits after you stop typing before it
+" triggers a plugin
+set updatetime=300
+" always show signcolumns
+set signcolumn=yes
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
 
 " PLUGINS CONFIG
 
