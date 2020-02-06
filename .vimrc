@@ -439,6 +439,10 @@ let g:terraform_fmt_on_save=1
 let g:black_linelength = 100
 let g:black_skip_string_normalization = 1
 let g:black_virtualenv = '~/workspaces/.nvim/black'
+" run black on save
+autocmd BufWritePre *.py execute ':Black'
+"  map F9 to run black on current file
+nnoremap <F9> :Black<CR>
 
 " COC
 " Use tab for trigger completion with characters ahead and navigate.
