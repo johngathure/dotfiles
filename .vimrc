@@ -46,9 +46,6 @@ Plug 'mxw/vim-jsx'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'millermedeiros/vim-esformatter'
 
-" search
-Plug 'rking/ag.vim'
-
 " maximize splits
 Plug 'szw/vim-maximizer'
 
@@ -99,9 +96,6 @@ Plug 'mtth/scratch.vim'
 
 " navigate and highlight matching words.
 Plug 'andymass/vim-matchup'
-
-" indents
-" Plug 'thaerkh/vim-indentguides'
 
 " Plugin to stop me from repeating keystrokes.
 Plug 'takac/vim-hardtime'
