@@ -60,7 +60,7 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe'
 
 " Python auto formater
-Plug 'ambv/black'
+Plug 'psf/black'
 
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
