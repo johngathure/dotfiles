@@ -1,5 +1,4 @@
-" - For Neovim: ~/.local/share/nvim/plugged
-call plug#begin('~/code/.nvim/plugged')
+call plug#begin('~/workspaces/.nvim/plugged')
 
 " Python mode
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
@@ -40,7 +39,7 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
 
-" js 
+" js
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'maksimr/vim-jsbeautify'
@@ -110,84 +109,64 @@ Plug 'hashivim/vim-terraform'
 
 " Initialize plugin system
 call plug#end()
-
-set encoding=utf-8
 syntax on
 
+" map leader key to space
 let mapleader = "\<Space>"
-
-filetype plugin indent on    " required
+filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set softtabstop=4
-
-" Automatically update a file if it is changed externally
+" automatically update a file if it is changed externally
 set autoread
-
-" Height of the command bar
+" height of the command bar
 set cmdheight=2
-
-set showcmd	" show last command in the bottom right
-
-set ruler	" always show current position
-
+" show last command in the bottom right
+set showcmd
+" always show current position
+set ruler
 " show matching braces
 set showmatch
-"
-set wildmenu	    " visual autocomplete for command menu
-
-"""""""""""""""""""""""""""""""""""""""""""""""""
+" visual autocomplete for command menu
+set wildmenu
+" hide files with unsaved changes instead of closing them
+set hidden
 " Backups, Swap Files
-"""""""""""""""""""""""""""""""""""""""""""""""""
 set nobackup
 set nowb
 set noswapfile
-
 " Define standard filetype
 set ffs=unix,dos,mac
-
-set cursorline	" highlight current active line
-
+" highlight current active line
+set cursorline
 " recognize .md files as markdown files
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-
 " enable spell-checking for markdown files
 autocmd BufRead,BufNewFile *.md setlocal spell
-
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
-
-" Turn hybrid numbers on
-set nu                  " display line numbers
+" display relative line numbers
 set nu rnu
-
-
-set clipboard+=unnamed  " use the clipboards of vim and win
-set go+=a               " Visual selection automatically copied to the clipboard
-
-
+" use the clipboards of vim and win
+set clipboard+=unnamed  
+" Visual selection automatically copied to the clipboard
+set go+=a
 " Always show statusline
 set laststatus=2
-
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
 
 highlight BadWhitespace ctermbg=red guibg=red
-
 " Display tabs at the beginning of a line in Python mode as bad.
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
 " Make trailing whitespace be flagged as bad.
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-
 " Use UNIX (\n) line endings.
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
-
 " make backspaces more powerfull
 set backspace=indent,eol,start
-
 " disable arrow keys in normal mode.
 no <down> <Nop>
 no <left> <Nop>
@@ -198,8 +177,7 @@ ino <down> <Nop>
 ino <left> <Nop>
 ino <right> <Nop>
 ino <up> <Nop>
-
-" SPLIT SCREEN NAVIGATION
+" split screen navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -210,22 +188,19 @@ nnoremap <C-H> <C-W><C-H>
 set ignorecase
 " use case sensitive search, if the search term contains uppercase characters
 set smartcase
-
 " improve scrolling performance and render performance
 set ttyfast
 " delay rendering for fewer renders, generally improves performance
 set lazyredraw
-
 " don't wrap lines
 set nowrap
-
 " Show hidden characters, useful on indentation.
 set list
-" set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
+set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
 
 " PLUGINS CONFIG
 
-" Pyhton mode setup
+" PYTHON MODE SETUP
 let g:python3_host_prog = '/usr/local/bin/python3'
 let g:pymode = 1
 let g:pymode_python = 'python3'
@@ -235,20 +210,18 @@ let g:pymode_lint_options_pep8 = {'max_line_length': g:pymode_options_max_line_l
 let g:pymode_options_colorcolumn = 1
 let python_highlight_all=1
 
-" simple fold
+" SIMPLE FOLD
 nnoremap <space> za
 let g:SimpylFold_docstring_preview=1
 
-" you complete me
+" YOU COMPLETE ME
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 
-
-" Dracula
+" DRACULA
 syntax on
 color dracula
-
 
 " NERD TREE TAB
 " Shortcut for opening nerd tree
@@ -267,8 +240,8 @@ let NERDTreeMinimalUI = 1
 " " ignore python compiled files
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
-
-
+" JS and CSS Formatters.
+" for js
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsxBeautify()<cr>
 " for json
 autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
@@ -279,10 +252,7 @@ autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 " for css or scss
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
-" run go fmt on saving go files
-" au BufWritePost *.go !gofmt -w %
-
-" vim-go
+" VIM-GO
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
@@ -341,10 +311,10 @@ endfunction
 com! DiffSaved call s:DiffWithSaved()
 
 
-" Tagbar
+" TAGBAR
 nmap <F8> :TagbarToggle<CR>
 
-" fzf
+" FZF
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
@@ -402,7 +372,7 @@ endfunction
 
 nnoremap <c-p> :FZF<CR>
 
-" emmet vim
+" EMMET VIM
 let g:user_emmet_leader_key=','
 let g:user_emmet_settings = {
     \  'javascript.jsx' : {
@@ -410,7 +380,7 @@ let g:user_emmet_settings = {
     \  },
 \}
 
-" lightline
+" LIGHTLINE
 let g:lightline = {
     \ 'colorscheme': 'wombat',
     \ 'active': {
@@ -422,26 +392,25 @@ let g:lightline = {
     \ },
     \ }
 
-" ale
+" ALE
 let g:ale_virtualtext_cursor = 1 " virtual text
 
-" vim tmux
+" VIM TMUX
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
-" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
-" limelight
+" LIMELIGHT
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 
 nmap <Leader>l <Plug>(Limelight)
 xmap <Leader>l <Plug>(Limelight)
 
-" hardtime
+" HARDTIME
 let g:hardtime_default_on = 1
 let g:hardtime_timeout = 2000
 let g:hardtime_ignore_buffer_patterns = ["NERD.*", "index"]
@@ -454,7 +423,7 @@ map <F2> :echo @% <CR>
 nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC<CR>
 
-" Vim terraform.
+" VIM TERRAFORM.
 let g:terraform_align=1
 let g:terraform_fold_sections=1
 let g:terraform_fmt_on_save=1
