@@ -447,6 +447,6 @@ let g:rustfmt_autosave = 1
 " You complete me
 let g:ycm_language_server=[{
     \ 'name': 'kotlin',
-    \ 'filetypes': [ 'kotlin' ],
-    \ 'cmdline': ['/Users/gathure/workspaces/.nvim/kotlin-language-server/server/build/install/server/bin/kotlin-language-server', '--stdio']
+    \ 'filetypes': ['kotlin'],
+    \ 'cmdline': ['/Users/johngathure/workspaces/.nvim/kotlin-language-server/server/build/install/server/bin/kotlin-language-server']
     \ }]
