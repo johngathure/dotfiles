@@ -16,10 +16,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tmhedberg/SimpylFold'
 
 " color schemes.
-Plug 'jnurmine/Zenburn'
-Plug 'flazz/vim-colorschemes'
-Plug 'altercation/vim-colors-solarized'
-Plug 'dracula/vim'
+Plug 'sonph/onehalf', {'rtp': 'vim/' }
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -226,9 +223,9 @@ let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 
-" DRACULA
-syntax on
-color dracula
+" Colorscheme
+" syntax on
+colorscheme onehalfdark
 
 " NERD TREE TAB
 " Shortcut for opening nerd tree
@@ -389,7 +386,7 @@ let g:user_emmet_settings = {
 
 " LIGHTLINE
 let g:lightline = {
-    \ 'colorscheme': 'wombat',
+    \ 'colorscheme': 'onehalfdark',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
