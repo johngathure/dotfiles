@@ -57,7 +57,7 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'ycm-core/YouCompleteMe'
 
 " Python auto formater
-Plug 'psf/black'
+Plug 'psf/black', { 'tag': '19.10b0' }
 
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
@@ -224,7 +224,7 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 
 " Colorscheme
-" syntax on
+syntax on
 colorscheme onehalfdark
 
 " NERD TREE TAB
