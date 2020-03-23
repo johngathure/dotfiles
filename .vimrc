@@ -103,6 +103,8 @@ Plug 'Shadowsith/kotlincomplete.vim'
 " Terraform
 Plug 'hashivim/vim-terraform'
 
+" Vagrant
+Plug 'hashivim/vim-vagrant'
 
 " Initialize plugin system
 call plug#end()
