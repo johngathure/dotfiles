@@ -42,6 +42,9 @@ Plug 'mxw/vim-jsx'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'millermedeiros/vim-esformatter'
 
+" graphql
+Plug 'jparise/vim-graphql'
+
 " maximize splits
 Plug 'szw/vim-maximizer'
 
