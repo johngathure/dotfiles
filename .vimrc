@@ -461,3 +461,6 @@ let g:ycm_language_server=[{
     \ 'filetypes': ['kotlin'],
     \ 'cmdline': ['/Users/johngathure/workspaces/.nvim/kotlin-language-server/server/build/install/server/bin/kotlin-language-server']
     \ }]
+
+" Scratch 
+nnoremap gs :Scratch<CR>
