@@ -405,6 +405,9 @@ let g:lightline = {
 
 " ALE
 let g:ale_virtualtext_cursor = 1 " virtual text
+let g:ale_python_auto_pipenv = 1
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
 
 " VIM TMUX
 let g:tmux_navigator_no_mappings = 1
@@ -442,7 +445,6 @@ let g:terraform_fmt_on_save=1
 " BLACK
 let g:black_linelength = 100
 let g:black_skip_string_normalization = 1
-let g:black_virtualenv = '~/workspaces/.nvim/black'
 " run black on save
 autocmd BufWritePre *.py execute ':Black'
 "  map F9 to run black on current file
