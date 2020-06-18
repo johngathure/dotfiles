@@ -109,6 +109,9 @@ Plug 'hashivim/vim-terraform'
 " Vagrant
 Plug 'hashivim/vim-vagrant'
 
+" Django vim
+Plug 'tweekmonster/django-plus.vim'
+
 " Initialize plugin system
 call plug#end()
 syntax on
