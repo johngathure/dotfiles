@@ -119,11 +119,22 @@ syntax on
 " map leader key to space
 let mapleader = "\<Space>"
 filetype plugin indent on
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set softtabstop=4
 " automatically update a file if it is changed externally
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
 set autoread
 " height of the command bar
 set cmdheight=2
@@ -142,7 +153,7 @@ set nobackup
 set nowb
 set noswapfile
 " Define standard filetype
-set ffs=unix,dos,mac
+set ffs=unix
 " highlight current active line
 set cursorline
 " recognize .md files as markdown files
@@ -155,7 +166,7 @@ set foldlevel=99
 " display relative line numbers
 set nu rnu
 " use the clipboards of vim and win
-set clipboard+=unnamed  
+set clipboard+=unnamed
 " Visual selection automatically copied to the clipboard
 set go+=a
 " Always show statusline
@@ -165,11 +176,9 @@ set t_Co=256
 
 highlight BadWhitespace ctermbg=red guibg=red
 " Display tabs at the beginning of a line in Python mode as bad.
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.go,*.rs,*.html,*.css,*.js match BadWhitespace /\s\+$/
 " Make trailing whitespace be flagged as bad.
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-" Use UNIX (\n) line endings.
-au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.go,*.rs,*.html,*.css,*.js match BadWhitespace /^\t\+/
 " make backspaces more powerfull
 set backspace=indent,eol,start
 " disable arrow keys in normal mode.
