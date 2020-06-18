@@ -1,7 +1,6 @@
 call plug#begin('~/workspaces/.nvim/plugged')
 
-" Python mode
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'vim-python/python-syntax'
 
 " Directory tree structure
 Plug 'scrooloose/nerdtree'
