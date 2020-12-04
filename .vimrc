@@ -1,6 +1,6 @@
 call plug#begin('~/workspaces/.nvim/plugged')
 
-Plug 'vim-python/python-syntax'
+Plug 'kh3phr3n/python-syntax'
 
 " Directory tree structure
 Plug 'scrooloose/nerdtree'
