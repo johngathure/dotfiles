@@ -110,6 +110,9 @@ Plug 'hashivim/vim-vagrant'
 " Django vim
 Plug 'tweekmonster/django-plus.vim'
 
+" Snippets
+Plug 'honza/vim-snippets'
+
 " Initialize plugin system
 call plug#end()
 syntax on
