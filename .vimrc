@@ -24,6 +24,8 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'idanarye/vim-merginal'
 Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
+
 Plug 'rhysd/git-messenger.vim'
 
 " rust
