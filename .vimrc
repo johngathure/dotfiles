@@ -113,6 +113,11 @@ Plug 'tweekmonster/django-plus.vim'
 " Snippets
 Plug 'honza/vim-snippets'
 
+" ember templates
+Plug 'joukevandermaas/vim-ember-hbs'
+
+Plug 'chrisbra/csv.vim'
+
 " Initialize plugin system
 call plug#end()
 syntax on
