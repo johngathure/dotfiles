@@ -16,7 +16,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tmhedberg/SimpylFold'
 
 " color schemes.
-Plug 'sonph/onehalf', {'rtp': 'vim/' }
+Plug 'arcticicestudio/nord-vim'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -242,7 +242,7 @@ let g:SimpylFold_docstring_preview=1
 
 " Colorscheme
 syntax on
-colorscheme onehalfdark
+colorscheme nord
 set t_Co=256
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -398,7 +398,7 @@ let g:user_emmet_settings = {
 
 " LIGHTLINE
 let g:lightline = {
-    \ 'colorscheme': 'onehalfdark',
+    \ 'colorscheme': 'nord',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
