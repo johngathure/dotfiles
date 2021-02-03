@@ -117,7 +117,15 @@ Plug 'honza/vim-snippets'
 " ember templates
 Plug 'joukevandermaas/vim-ember-hbs'
 
+" csv template
 Plug 'chrisbra/csv.vim'
+
+" js bundles import cost
+Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
+
+" typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " Initialize plugin system
 call plug#end()
@@ -385,6 +393,19 @@ let g:ale_virtualtext_cursor = 1 " virtual text
 let g:ale_python_auto_pipenv = 1
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
+let g:ale_linters = {
+	\'javascript': ['eslint'],
+	\'javascript.jsx': ['eslint'],
+	\'typescript': ['eslint', 'tsserver'],
+	\'typescriptreact': ['eslint', 'tsserver']
+	\}
+
+let g:ale_fixers = {
+	\'javascript': ['prettier', 'eslint'],
+	\'javascript.jsx': ['prettier', 'eslint'],
+	\'typescript': ['prettier', 'eslint'],
+	\'typescriptreact': ['prettier', 'eslint']
+	\}
 
 " VIM TMUX
 let g:tmux_navigator_no_mappings = 1
