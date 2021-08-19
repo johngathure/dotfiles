@@ -82,6 +82,8 @@
 
     f = fetch origin
 
+    s = switch
+
 [push]
     default = current
 
