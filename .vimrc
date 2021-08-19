@@ -135,7 +135,7 @@ syntax on
 let mapleader = "\<Space>"
 filetype plugin indent on
 " automatically update a file if it is changed externally
-au BufNewFile,BufRead *.py,*.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.sass,*.html,*.json
+au BufNewFile,BufRead *.py,*.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.sass,*.html,*.json,*.handlebars
     \ set textwidth=79
     \| set expandtab
     \| set autoindent
@@ -146,7 +146,7 @@ au BufNewFile,BufRead *.py
     \| set softtabstop=4
     \| set shiftwidth=4
 
-au BufNewFile,BufRead *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.sass,*.html,*.json
+au BufNewFile,BufRead *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.sass,*.html,*.json,*.handlebars
     \ set tabstop=2
     \| set softtabstop=2
     \| set shiftwidth=2
