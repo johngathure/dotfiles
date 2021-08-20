@@ -599,3 +599,10 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" python mode
+let g:pymode_options_max_line_length = 100
+let g:pymode_lint_options_pep8 = {'max_line_length': g:pymode_options_max_line_length}
+let g:pymode_options_colorcolumn = 1
+autocmd FileType python set colorcolumn=100
+let g:pymode_lint_cwindow = 0
