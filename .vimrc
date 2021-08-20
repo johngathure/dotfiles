@@ -457,7 +457,8 @@ nnoremap <F9> :Black<CR>
 let g:rustfmt_autosave = 1
 
 " Scratch
-nnoremap gs :Scratch<CR>
+nnoremap gsn :Scratch<CR>
+let g:scratch_persistence_file = '/Users/gathure/workspaces/.tmp/editorscratch'
 
 " TextEdit might fail if hidden is not set.
 set hidden
