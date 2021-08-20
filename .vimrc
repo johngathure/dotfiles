@@ -113,6 +113,7 @@ Plug 'tweekmonster/django-plus.vim'
 
 " Snippets
 Plug 'honza/vim-snippets'
+Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
 
 " ember templates
 Plug 'joukevandermaas/vim-ember-hbs'
