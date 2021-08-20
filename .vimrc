@@ -191,6 +191,9 @@ set go+=a
 set laststatus=2
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
+" number of lines to always be displayed above and below cursor everytime.
+set scrolloff=30
+
 
 highlight BadWhitespace ctermbg=red guibg=red
 " Display tabs at the beginning of a line in Python mode as bad.
