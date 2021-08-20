@@ -411,6 +411,7 @@ let g:ale_fixers = {
 	\'typescriptreact': ['prettier', 'eslint']
 	\}
 
+let g:ale_fix_on_save = 1
 " VIM TMUX
 let g:tmux_navigator_no_mappings = 1
 
