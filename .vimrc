@@ -63,7 +63,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "
 
 " Python auto formater
-Plug 'psf/black', { 'tag': '19.10b0' }
+Plug 'psf/black'
 
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
