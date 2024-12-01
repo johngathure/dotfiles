@@ -29,9 +29,8 @@ then
 elif [[ $editor == "NVIM" ]]
 then 
 
-    echo "${BOLD}Creating system link $(pwd)/vimrc -> ${HOMEDIR}/.config/nvim/init.vim${NORM}"
-    [ -d $HOMEDIR/.config/nvim ] || mkdir -p $HOMEDIR/.config/nvim
-    ln -sf $(pwd)/.vimrc $HOMEDIR/.config/nvim/init.vim
+    echo "${BOLD}Creating system link $(pwd)/nvim/ -> ${HOMEDIR}/.config/${NORM}"
+    ln -sf $(pwd)/nvim/ $HOMEDIR/.config/
     echo "${GREEN}Successfully created system link${NORM}"
 else
     echo -e "${RED}Incorrect input${NORM}\a"
