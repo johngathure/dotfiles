@@ -1,4 +1,4 @@
-call plug#begin('~/workspaces/.nvim/plugged')
+call plug#begin()
 
 " Python mode.
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
@@ -42,7 +42,7 @@ Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'maksimr/vim-jsbeautify'
-Plug 'millermedeiros/vim-esformatter'
+" Plug 'millermedeiros/vim-esformatter'
 
 " graphql
 Plug 'jparise/vim-graphql'
@@ -127,6 +127,8 @@ Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 " typescript
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Initialize plugin system
 call plug#end()
@@ -606,3 +608,14 @@ let g:pymode_lint_options_pep8 = {'max_line_length': g:pymode_options_max_line_l
 let g:pymode_options_colorcolumn = 1
 autocmd FileType python set colorcolumn=100
 let g:pymode_lint_cwindow = 0
+
+lua << EOF
+require("nvim-treesitter.configs").setup({
+    ensure_installed = { "javascript", "typescript", "vim", "json", "html", "tsx", "python" },
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+        enable = true,
+    },
+})
+EOF
