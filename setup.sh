@@ -10,9 +10,9 @@ NORM="`tput sgr0`"
 HOMEDIR=$HOME
 
 clear
-echo -e "Setting up vim/nvim and tmux config files..... \n"
+echo -e "Setting up vim/nvim, tmux and git config files..... \n"
 # Promt user to enter editor they are using.
-read -p "${BOLD}Are you using vim or neovim (VI) for vim (NVI) for neovim... ${NORM}" editor
+read -p "${BOLD}Are you using vim or neovim (VI) for vim (NVIM) for neovim... ${NORM}" editor
 
 # enable case insensitive matching ie if user enters vi create sys link
 shopt -s nocasematch
@@ -23,10 +23,10 @@ then
     exit 1
 elif [[ $editor == "VI" ]]
 then
-    echo "${BOLD}Creating system link $(pwd)/vimrc -> $HOMEDIR/.vimrc${NORM}"
-    ln -sf $(pwd)/.vimrc $HOMEDIR/.vimrc
+    echo "${BOLD}Creating system link $(pwd)/vim/vimrc -> $HOMEDIR/.vimrc${NORM}"
+    ln -sf $(pwd)/vim/vimrc $HOMEDIR/.vimrc
     echo "${GREEN}Successfully created system link${NORM}"
-elif [[ $editor == "NVI" ]]
+elif [[ $editor == "NVIM" ]]
 then 
 
     echo "${BOLD}Creating system link $(pwd)/vimrc -> ${HOMEDIR}/.config/nvim/init.vim${NORM}"
@@ -41,11 +41,11 @@ fi
 shopt -u nocasematch
 
 # setup tmux conf.
-echo "${BOLD}Creating system link $(pwd)/tmux.conf -> ${HOMEDIR}/.tmux.conf${NORM}"
-ln -sf $(pwd)/.tmux.conf ${HOMEDIR}/.tmux.conf
+echo "${BOLD}Creating system link $(pwd)/tmux/tmux.conf -> ${HOMEDIR}/.tmux.conf${NORM}"
+ln -sf $(pwd)/tmux/tmux.conf ${HOMEDIR}/.tmux.conf
 echo "${GREEN}Successfully created system link${NORM}"
 
 # setup git config
-echo "${BOLD}Creating system link $(pwd)/gitconfig -> ${HOMEDIR}/.gitconfig${NORM}"
-ln -sf $(pwd)/.gitconfig ${HOMEDIR}/.gitconfig
+echo "${BOLD}Creating system link $(pwd)/git/gitconfig -> ${HOMEDIR}/.gitconfig${NORM}"
+ln -sf $(pwd)/git/gitconfig ${HOMEDIR}/.gitconfig
 echo "${GREEN}Successfully created system link${NORM}"
