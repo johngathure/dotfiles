@@ -5,10 +5,9 @@ return {
     "ozthemagician/alpha-cowsays-nvim",
   },
   config = function()
-    local alpha = require("alpha")
-    local dashboard = require("alpha.themes.dashboard")
-    local startify = require("alpha.themes.startify")
-    local cow = require("alpha-cowsays-nvim")
+    local alpha = require "alpha"
+    local dashboard = require "alpha.themes.dashboard"
+    local cow = require "alpha-cowsays-nvim"
 
     -- Set header
     dashboard.section.header.val = cow.cowsays()
@@ -27,6 +26,6 @@ return {
     alpha.setup(dashboard.opts)
 
     -- Disable folding on alpha buffer
-    vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
+    vim.cmd [[autocmd FileType alpha setlocal nofoldenable]]
   end,
 }
