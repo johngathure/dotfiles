@@ -1,60 +1,60 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPre", "BufNewFile" },
+  branch = "main",
+  -- the main branch does not support lazy-loading
+  lazy = false,
   build = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
   },
   config = function()
-    -- import nvim-treesitter plugin
-    local treesitter = require "nvim-treesitter.configs"
+    local treesitter = require "nvim-treesitter"
 
-    -- configure treesitter
-    treesitter.setup { -- enable syntax highlighting
-      highlight = {
-        enable = true,
-      },
-      -- enable indentation
-      indent = { enable = true },
-      -- enable autotagging (w/ nvim-ts-autotag plugin)
-      autotag = {
-        enable = true,
-      },
-      matchup = {
-        enable = true,
-        disable = { "python" },
-      },
-      -- ensure these language parsers are installed
-      ensure_installed = {
-        "python",
-        "javascript",
-        "typescript",
-        "sql",
-        "json",
-        "tsx",
-        "yaml",
-        "html",
-        "css",
-        "markdown",
-        "markdown_inline",
-        "graphql",
-        "bash",
-        "lua",
-        "vim",
-        "dockerfile",
-        "gitignore",
-        "query",
-        "vimdoc",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
+    require("nvim-ts-autotag").setup()
+
+    treesitter.setup {
+      -- parsers and queries are installed here (prepended to runtimepath)
+      install_dir = vim.fn.stdpath "data" .. "/site",
     }
+
+    -- ensure these language parsers are installed (no-op if already present)
+    treesitter.install {
+      "python",
+      "javascript",
+      "typescript",
+      "sql",
+      "json",
+      "tsx",
+      "yaml",
+      "html",
+      "css",
+      "markdown",
+      "markdown_inline",
+      "graphql",
+      "bash",
+      "lua",
+      "vim",
+      "dockerfile",
+      "gitignore",
+      "query",
+      "vimdoc",
+    }
+
+    -- highlighting and indentation are opt-in per buffer on the main branch
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("gathure_treesitter", { clear = true }),
+      callback = function(args)
+        local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+        if not lang or not vim.treesitter.language.add(lang) then
+          return
+        end
+
+        -- enable syntax highlighting
+        vim.treesitter.start(args.buf, lang)
+
+        -- enable indentation (experimental upstream)
+        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
+    })
   end,
 }
