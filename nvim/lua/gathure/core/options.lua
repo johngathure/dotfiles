@@ -44,3 +44,6 @@ vim.opt.hidden = true -- hide files with unsaved changes instead of closing them
 vim.opt.ffs = "unix" -- define standard filetype.
 vim.opt.laststatus = 2 -- always show status line.
 vim.opt.scrolloff = 30 -- number of lines to always be displayed above and below cursor everytime.
+
+vim.g.python3_host_prog = vim.fn.expand "~/.venvs/neovim/bin/python3"
+vim.g.perl_host_prog = vim.fn.exepath "/usr/bin/perl"
