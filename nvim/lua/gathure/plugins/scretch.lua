@@ -1,11 +1,13 @@
 return {
   "0xJohnnyboy/scretch.nvim",
+  cmd = "Scretch",
   dependencies = {
     "nvim-telescope/telescope.nvim",
   },
-  config = function()
-    require("scretch").setup {
-      scretch_dir = vim.fn.stdpath "data" .. "/scretch/",
-    }
+  opts = {
+    scretch_dir = vim.fn.stdpath "data" .. "/scretch/",
+  },
+  config = function(_, opts)
+    require("scretch").setup(opts)
   end,
 }
