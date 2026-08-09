@@ -22,14 +22,14 @@ return {
         jinja = { "djlint" },
       },
       format_on_save = {
-        lsp_fallback = true,
+        lsp_format = "fallback",
         async = false,
       },
     }
 
     vim.keymap.set({ "n", "v" }, "<leader>mp", function()
       conform.format {
-        lsp_fallback = true,
+        lsp_format = "fallback",
         async = false,
       }
     end, { desc = "Format file or range (in visual mode)" })
