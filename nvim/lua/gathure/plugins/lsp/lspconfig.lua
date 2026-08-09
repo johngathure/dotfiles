@@ -1,22 +1,64 @@
+-- Per-server settings live in nvim/lsp/<server>.lua, which Neovim resolves from
+-- the runtimepath (see :h vim.lsp.config). mason-lspconfig 2.x calls
+-- vim.lsp.enable() for each installed server, replacing setup_handlers().
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-    { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    -- lazydev replaces the archived neodev.nvim for lua_ls + Neovim API types
+    {
+      "folke/lazydev.nvim",
+      ft = "lua",
+      opts = {
+        library = {
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+      },
+    },
+    {
+      "mason-org/mason-lspconfig.nvim",
+      dependencies = {
+        "mason-org/mason.nvim",
+        "hrsh7th/cmp-nvim-lsp",
+        "antosha417/nvim-lsp-file-operations",
+      },
+      opts = {
+        ensure_installed = {
+          "ts_ls",
+          "html",
+          "cssls",
+          "tailwindcss",
+          "lua_ls",
+          "emmet_ls",
+          "pyright",
+        },
+        -- stylua is installed as a formatter for conform, but mason maps it to an
+        -- lspconfig entry (stylua --lsp) that would otherwise be auto-enabled and
+        -- spawn a second server on every lua buffer.
+        automatic_enable = {
+          exclude = { "stylua" },
+        },
+      },
+      config = function(_, opts)
+        -- capabilities have to be registered before mason-lspconfig enables the
+        -- servers, otherwise a client can start with an already-resolved config
+        -- that is missing them. "*" is merged into every server config.
+        local file_operations = require "lsp-file-operations"
+        file_operations.setup()
+
+        vim.lsp.config("*", {
+          capabilities = vim.tbl_deep_extend("force", require("cmp_nvim_lsp").default_capabilities(), file_operations.default_capabilities()),
+        })
+
+        require("mason-lspconfig").setup(opts)
+      end,
+    },
   },
   config = function()
-    -- import mason_lspconfig plugin
-    local mason_lspconfig = require "mason-lspconfig"
-
-    -- import cmp-nvim-lsp plugin
-    local cmp_nvim_lsp = require "cmp_nvim_lsp"
-
     local keymap = vim.keymap -- for conciseness
 
     vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+      group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
       callback = function(ev)
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -50,87 +92,38 @@ return {
         opts.desc = "Show line diagnostics"
         keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
+        -- goto_prev/goto_next are deprecated since 0.11 in favour of jump()
         opts.desc = "Go to previous diagnostic"
-        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+        keymap.set("n", "[d", function()
+          vim.diagnostic.jump { count = -1, float = true }
+        end, opts)
 
         opts.desc = "Go to next diagnostic"
-        keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+        keymap.set("n", "]d", function()
+          vim.diagnostic.jump { count = 1, float = true }
+        end, opts)
 
         opts.desc = "Show documentation for what is under cursor"
         keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
         opts.desc = "Restart LSP"
-        keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+        keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", opts) -- mapping to restart lsp if necessary
       end,
     })
 
-    -- used to enable autocompletion (assign to every lsp server config)
-    local capabilities = cmp_nvim_lsp.default_capabilities()
-
-    -- Change the Diagnostic symbols in the sign column (gutter)
-    -- (not in youtube nvim video)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-
-    mason_lspconfig.setup_handlers {
-      -- default handler for installed servers
-      function(server_name)
-        vim.lsp.enable(server_name)
-        vim.lsp.config(server_name, {
-          capabilities = capabilities,
-        })
-      end,
-      ["emmet_ls"] = function()
-        -- configure emmet language server
-        vim.lsp.enable "emmet_ls"
-        vim.lsp.config("emmet_ls", {
-          capabilities = capabilities,
-          filetypes = {
-            "html",
-            "htmldjango",
-            "typescriptreact",
-            "javascriptreact",
-            "css",
-            "sass",
-            "scss",
-            "less",
-          },
-        })
-      end,
-      ["lua_ls"] = function()
-        -- configure lua server (with special settings)
-        vim.lsp.enable "lua_ls"
-        vim.lsp.config("lua_ls", {
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              -- make the language server recognize "vim" global
-              diagnostics = {
-                globals = { "vim" },
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        })
-      end,
-      ["pyright"] = function()
-        vim.lsp.enable "pyright"
-        vim.lsp.config("pyright", {
-          capabilities = capabilities,
-          settings = {
-            python = {
-              analysis = {
-                typeCheckingMode = "off",
-              },
-            },
-          },
-        })
-      end,
+    -- Diagnostic symbols in the sign column (gutter).
+    -- Diagnostics are drawn with extmarks since 0.10, so sign_define() has no
+    -- effect any more -- the icons have to go through diagnostic.config().
+    vim.diagnostic.config {
+      severity_sort = true,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = "󰠠 ",
+          [vim.diagnostic.severity.INFO] = " ",
+        },
+      },
     }
   end,
 }

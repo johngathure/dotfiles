@@ -1,21 +1,14 @@
+-- mason 2.x lives under the mason-org org (the williamboman repos are redirects)
+-- and requires Neovim 0.11+.
+--
+-- mason itself is only loaded on demand: nvim-lspconfig pulls it in via
+-- mason-lspconfig on BufReadPre, so the registry/installer stack no longer runs
+-- during startup. mason-lspconfig is declared in lspconfig.lua as a dependency.
 return {
-  "williamboman/mason.nvim",
-  version = "^1.0.0",
-  dependencies = {
-    { "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-  },
-  config = function()
-    -- import mason
-    local mason = require "mason"
-
-    -- import mason-lspconfig
-    local mason_lspconfig = require "mason-lspconfig"
-
-    local mason_tool_installer = require "mason-tool-installer"
-
-    -- enable mason and configure icons
-    mason.setup {
+  {
+    "mason-org/mason.nvim",
+    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog", "MasonUpdate" },
+    opts = {
       ui = {
         icons = {
           package_installed = "✓",
@@ -23,22 +16,13 @@ return {
           package_uninstalled = "✗",
         },
       },
-    }
-
-    mason_lspconfig.setup {
-      -- list of servers for mason to install
-      ensure_installed = {
-        "ts_ls",
-        "html",
-        "cssls",
-        "tailwindcss",
-        "lua_ls",
-        "emmet_ls",
-        "pyright",
-      },
-    }
-
-    mason_tool_installer.setup {
+    },
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "mason-org/mason.nvim" },
+    event = "VeryLazy",
+    opts = {
       ensure_installed = {
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
@@ -46,7 +30,12 @@ return {
         "black", -- python formatter
         "pylint",
         "eslint_d",
+        "djlint", -- django/jinja template formatter + linter
       },
-    }
-  end,
+      -- keep the install check off the critical path of opening a file
+      run_on_start = true,
+      start_delay = 3000,
+      debounce_hours = 24,
+    },
+  },
 }
