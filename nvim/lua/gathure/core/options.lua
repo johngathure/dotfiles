@@ -1,3 +1,4 @@
+-- Only options that differ from Neovim's defaults. Things like 'hidden',
 vim.opt.relativenumber = true
 vim.opt.number = true
 
@@ -5,7 +6,6 @@ vim.opt.number = true
 vim.opt.tabstop = 2 -- 2 spaces for tabs
 vim.opt.shiftwidth = 2 -- 2 spaces for indent width
 vim.opt.expandtab = true -- expand tabs to spaces
-vim.opt.autoindent = true -- copy indent from current line when starting new one.
 
 vim.opt.wrap = false
 
@@ -14,15 +14,13 @@ vim.opt.ignorecase = true -- ignore case when searching
 vim.opt.smartcase = true -- if you include mixed case in your search, assumes you want case sensitive.
 
 vim.opt.cursorline = true
-
--- turn on termguicolors
--- (have to use iterm2 or any other terminal with true color)
-vim.opt.termguicolors = true
-vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
 
--- backspace
-vim.opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
+-- true colour: Neovim autodetects this, but tmux makes detection unreliable so
+-- keep it explicit. Setting 'background' also stops Neovim from second-guessing
+-- the theme from the terminal's OSC 11 reply.
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
 
 -- clipboard
 vim.opt.clipboard:append "unnamedplus" -- use system clipboard as default register
@@ -31,19 +29,16 @@ vim.opt.clipboard:append "unnamedplus" -- use system clipboard as default regist
 vim.opt.splitright = true -- split vertical window to the right
 vim.opt.splitbelow = true -- split horizontal window to the bottom
 
-vim.opt.autoread = true
-
--- command bar
--- vim.opt.cmdheight = 2
-vim.opt.showcmd = true
-vim.opt.wildmenu = true -- visual autocomplete on command menu
-
-vim.opt.ruler = true -- show current position
 vim.opt.showmatch = true -- show matching braces
-vim.opt.hidden = true -- hide files with unsaved changes instead of closing them.
-vim.opt.ffs = "unix" -- define standard filetype.
-vim.opt.laststatus = 2 -- always show status line.
+vim.opt.ffs = "unix" -- define standard fileformat.
 vim.opt.scrolloff = 30 -- number of lines to always be displayed above and below cursor everytime.
 
+-- Providers. Pointing at the host programs explicitly means Neovim never has to
+-- search $PATH for them on startup.
 vim.g.python3_host_prog = vim.fn.expand "~/.venvs/neovim/bin/python3"
-vim.g.perl_host_prog = vim.fn.exepath "/usr/bin/perl"
+-- NOTE: version-scoped path, update after a ruby major upgrade (`gem which neovim`)
+vim.g.ruby_host_prog = "/opt/homebrew/lib/ruby/gems/4.0.0/bin/neovim-ruby-host"
+vim.g.node_host_prog = "/opt/homebrew/lib/node_modules/neovim/bin/cli.js"
+
+-- perl is the one host that is not installed (needs `cpan Neovim::Ext`)
+vim.g.loaded_perl_provider = 0
