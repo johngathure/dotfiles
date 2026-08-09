@@ -2,15 +2,24 @@ return {
   "goolord/alpha-nvim",
   event = "VimEnter",
   dependencies = {
-    "ozthemagician/alpha-cowsays-nvim",
+    {
+      -- used only for startify#fortune#cowsay(); the start screen itself stays
+      -- off so it does not compete with alpha for the empty buffer
+      "mhinz/vim-startify",
+      init = function()
+        vim.g.startify_disable_at_vimenter = 1
+        -- rounded box borders instead of the ASCII *---* default
+        vim.g.startify_fortune_use_unicode = 1
+      end,
+    },
   },
   config = function()
     local alpha = require "alpha"
     local dashboard = require "alpha.themes.dashboard"
-    local cow = require "alpha-cowsays-nvim"
 
-    -- Set header
-    dashboard.section.header.val = cow.cowsays()
+    -- Set header. startify picks the quote from reltime() microseconds, so it
+    -- varies per launch (unlike the unseeded math.random it was ported to).
+    dashboard.section.header.val = vim.fn["startify#fortune#cowsay"]()
 
     -- Set menu
     dashboard.section.buttons.val = {
