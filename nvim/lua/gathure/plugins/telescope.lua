@@ -19,8 +19,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
     },
     { "nvim-telescope/telescope-ui-select.nvim" },
 
-    -- Useful for getting pretty icons, but requires a Nerd Font.
-    { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+    -- Icons (requires a Nerd Font).
+    "nvim-mini/mini.icons",
   },
   config = function()
     -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -45,13 +45,13 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
     local actions = require "telescope.actions"
-    local trouble = require "trouble"
-    local trouble_telescope = require "trouble.sources.telescope"
     local transform_mod = require("telescope.actions.mt").transform_mod
 
+    -- trouble is required lazily inside the actions so that opening telescope
+    -- does not drag the whole of trouble in at startup
     local custom_actions = transform_mod {
       open_trouble_qflist = function(prompt_bufnr)
-        trouble.toggle "quickfix"
+        require("trouble").toggle "quickfix"
       end,
     }
 
@@ -65,7 +65,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
             ["<C-j>"] = actions.move_selection_next, -- move to next result
             ["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
-            ["<C-t>"] = trouble_telescope.open,
+            ["<C-t>"] = function(...)
+              return require("trouble.sources.telescope").open(...)
+            end,
           },
         },
         file_ignore_patterns = { "%.git/", "node_modules/", "%.cache/", "%.venv/", "%.pytest_cache/" },
