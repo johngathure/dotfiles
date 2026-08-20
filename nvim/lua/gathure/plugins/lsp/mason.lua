@@ -24,13 +24,13 @@ return {
     event = "VeryLazy",
     opts = {
       ensure_installed = {
-        "prettier", -- prettier formatter
+        "biome", -- js/ts/jsx/tsx/css/html/json/graphql formatter
+        "prettier", -- yaml + markdown formatter
         "stylua", -- lua formatter
-        "isort", -- python formatter
-        "black", -- python formatter
+        "ruff", -- python formatter + import sorter
         "pylint",
         "eslint_d",
-        "djlint", -- django/jinja template formatter + linter
+        "djlint", -- django/jinja template linter (formatting is djangofmt, installed outside mason)
       },
       -- keep the install check off the critical path of opening a file
       run_on_start = true,

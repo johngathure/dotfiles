@@ -6,20 +6,30 @@ return {
 
     conform.setup {
       formatters_by_ft = {
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
-        css = { "prettier" },
-        html = { "prettier" },
-        json = { "prettier" },
+        javascript = { "biome" },
+        typescript = { "biome" },
+        javascriptreact = { "biome" },
+        typescriptreact = { "biome" },
+        css = { "biome" },
+        html = { "biome" },
+        json = { "biome" },
+        jsonc = { "biome" },
+        graphql = { "biome" },
         yaml = { "prettier" },
         markdown = { "prettier" },
         lua = { "stylua" },
-        python = { "isort", "black" },
-        htmldjango = { "djlint" },
-        django = { "djlint" },
-        jinja = { "djlint" },
+        python = { "ruff_organize_imports", "ruff_format" },
+        htmldjango = { "djangofmt" },
+        django = { "djangofmt" },
+        jinja = { "djangofmt" },
+      },
+      formatters = {
+        -- not shipped with the pinned conform version yet; mirrors upstream
+        djangofmt = {
+          command = "djangofmt",
+          args = { "--stdin-filename", "$FILENAME" },
+          stdin = true,
+        },
       },
       format_on_save = {
         lsp_format = "fallback",
