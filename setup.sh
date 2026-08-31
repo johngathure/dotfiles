@@ -48,3 +48,8 @@ echo "${GREEN}Successfully created system link${NORM}"
 echo "${BOLD}Creating system link $(pwd)/git/gitconfig -> ${HOMEDIR}/.gitconfig${NORM}"
 ln -sf $(pwd)/git/gitconfig ${HOMEDIR}/.gitconfig
 echo "${GREEN}Successfully created system link${NORM}"
+
+# setup homebrew Brewfile (used by `brew bundle install --global`)
+echo "${BOLD}Creating system link $(pwd)/homebrew/Brewfile -> ${HOMEDIR}/.Brewfile${NORM}"
+ln -sf $(pwd)/homebrew/Brewfile ${HOMEDIR}/.Brewfile
+echo "${GREEN}Successfully created system link${NORM}"
