@@ -1,4 +1,6 @@
+tap "derailed/k9s"
 tap "int128/kubelogin"
+tap "jesseduffield/lazydocker"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Arbitrary precision numeric processing language
@@ -7,16 +9,22 @@ brew "bc"
 brew "coreutils"
 # Get, unpack, build, and install modules from CPAN
 brew "cpanminus"
+# Tool for exploring each layer in a docker image
+brew "dive"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GNU awk utility
 brew "gawk"
 # GitHub command-line tool
 brew "gh"
+# Render markdown on the CLI
+brew "glow"
 # Open-source GitLab command-line tool
 brew "glab"
 # GNU implementation of the famous stream editor
@@ -63,6 +71,10 @@ brew "tree-sitter-cli"
 brew "uv"
 # Internet file retriever
 brew "wget"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "derailed/k9s/k9s", trusted: true
+# A simple terminal UI for docker, written in Go
+brew "jesseduffield/lazydocker/lazydocker", trusted: true
 # Brings the power of Copilot coding agent directly to your terminal
 cask "copilot-cli"
 # App to build and share containerised applications and microservices
@@ -92,3 +104,5 @@ cask "zed"
 uv "djangofmt"
 # Nvim msgpack API client and remote plugin provider
 npm "neovim"
+# Command-line interface for gulp
+npm "gulp-cli"
