@@ -9,6 +9,9 @@ NORM="`tput sgr0`"
 # User's home dir
 HOMEDIR=$HOME
 
+# Absolute path of this repo, so the script works from any directory
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 clear
 echo -e "Setting up vim/nvim, tmux and git config files..... \n"
 # Promt user to enter editor they are using.
@@ -23,14 +26,25 @@ then
     exit 1
 elif [[ $editor == "VI" ]]
 then
-    echo "${BOLD}Creating system link $(pwd)/vim/vimrc -> $HOMEDIR/.vimrc${NORM}"
-    ln -sf $(pwd)/vim/vimrc $HOMEDIR/.vimrc
+    echo "${BOLD}Creating system link ${DOTFILES}/vim/vimrc -> ${HOMEDIR}/.vimrc${NORM}"
+    ln -sf "${DOTFILES}/vim/vimrc" "${HOMEDIR}/.vimrc"
     echo "${GREEN}Successfully created system link${NORM}"
 elif [[ $editor == "NVIM" ]]
 then 
 
-    echo "${BOLD}Creating system link $(pwd)/nvim/ -> ${HOMEDIR}/.config/${NORM}"
-    ln -sf $(pwd)/nvim/ $HOMEDIR/.config/
+    NVIM_TARGET="${HOMEDIR}/.config/nvim"
+    mkdir -p "${HOMEDIR}/.config"
+    # A real (non-symlink) config dir would make ln nest the link inside it,
+    # so move it aside first.
+    if [ -d "$NVIM_TARGET" ] && [ ! -L "$NVIM_TARGET" ]
+    then
+        BACKUP="${NVIM_TARGET}.bak.$(date +%Y%m%d%H%M%S)"
+        echo "${BOLD}Backing up existing ${NVIM_TARGET} -> ${BACKUP}${NORM}"
+        mv "$NVIM_TARGET" "$BACKUP"
+    fi
+    echo "${BOLD}Creating system link ${DOTFILES}/nvim -> ${NVIM_TARGET}${NORM}"
+    # -n replaces an existing symlink instead of following it
+    ln -sfn "${DOTFILES}/nvim" "$NVIM_TARGET"
     echo "${GREEN}Successfully created system link${NORM}"
 else
     echo -e "${RED}Incorrect input${NORM}\a"
@@ -40,22 +54,22 @@ fi
 shopt -u nocasematch
 
 # setup tmux conf.
-echo "${BOLD}Creating system link $(pwd)/tmux/tmux.conf -> ${HOMEDIR}/.tmux.conf${NORM}"
-ln -sf $(pwd)/tmux/tmux.conf ${HOMEDIR}/.tmux.conf
+echo "${BOLD}Creating system link ${DOTFILES}/tmux/tmux.conf -> ${HOMEDIR}/.tmux.conf${NORM}"
+ln -sf "${DOTFILES}/tmux/tmux.conf" "${HOMEDIR}/.tmux.conf"
 echo "${GREEN}Successfully created system link${NORM}"
 
 # setup git config
-echo "${BOLD}Creating system link $(pwd)/git/gitconfig -> ${HOMEDIR}/.gitconfig${NORM}"
-ln -sf $(pwd)/git/gitconfig ${HOMEDIR}/.gitconfig
+echo "${BOLD}Creating system link ${DOTFILES}/git/gitconfig -> ${HOMEDIR}/.gitconfig${NORM}"
+ln -sf "${DOTFILES}/git/gitconfig" "${HOMEDIR}/.gitconfig"
 echo "${GREEN}Successfully created system link${NORM}"
 
 # setup homebrew Brewfile (used by `brew bundle install --global`)
-echo "${BOLD}Creating system link $(pwd)/homebrew/Brewfile -> ${HOMEDIR}/.Brewfile${NORM}"
-ln -sf $(pwd)/homebrew/Brewfile ${HOMEDIR}/.Brewfile
+echo "${BOLD}Creating system link ${DOTFILES}/homebrew/Brewfile -> ${HOMEDIR}/.Brewfile${NORM}"
+ln -sf "${DOTFILES}/homebrew/Brewfile" "${HOMEDIR}/.Brewfile"
 echo "${GREEN}Successfully created system link${NORM}"
 
 # setup claude code user settings
-echo "${BOLD}Creating system link $(pwd)/claude/settings.json -> ${HOMEDIR}/.claude/settings.json${NORM}"
-mkdir -p ${HOMEDIR}/.claude
-ln -sf $(pwd)/claude/settings.json ${HOMEDIR}/.claude/settings.json
+echo "${BOLD}Creating system link ${DOTFILES}/claude/settings.json -> ${HOMEDIR}/.claude/settings.json${NORM}"
+mkdir -p "${HOMEDIR}/.claude"
+ln -sf "${DOTFILES}/claude/settings.json" "${HOMEDIR}/.claude/settings.json"
 echo "${GREEN}Successfully created system link${NORM}"
