@@ -1,6 +1,15 @@
 {
   "editorMode": "vim",
   "preferredNotifChannel": "terminal_bell",
+  "hooks": {
+    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "[ -z \"$TMUX_PANE\" ] || tmux rename-window -t \"$TMUX_PANE\" '⏳ claude'" }] }],
+    "Notification": [{
+      "matcher": "permission_prompt|elicitation_dialog",
+      "hooks": [{ "type": "command", "command": "[ -z \"$TMUX_PANE\" ] || tmux rename-window -t \"$TMUX_PANE\" '❓ claude'" }]
+    }],
+    "Stop": [{ "hooks": [{ "type": "command", "command": "[ -z \"$TMUX_PANE\" ] || tmux rename-window -t \"$TMUX_PANE\" '✅ claude'" }] }],
+    "SessionEnd": [{ "hooks": [{ "type": "command", "command": "[ -z \"$TMUX_PANE\" ] || tmux set -w -t \"$TMUX_PANE\" automatic-rename on" }] }]
+  },
   "permissions": {
     "deny": [
       "Read(./.env)",
