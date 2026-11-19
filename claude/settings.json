@@ -1,5 +1,6 @@
 {
   "editorMode": "vim",
+  "preferredNotifChannel": "terminal_bell",
   "permissions": {
     "deny": [
       "Read(./.env)",
