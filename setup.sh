@@ -53,3 +53,9 @@ echo "${GREEN}Successfully created system link${NORM}"
 echo "${BOLD}Creating system link $(pwd)/homebrew/Brewfile -> ${HOMEDIR}/.Brewfile${NORM}"
 ln -sf $(pwd)/homebrew/Brewfile ${HOMEDIR}/.Brewfile
 echo "${GREEN}Successfully created system link${NORM}"
+
+# setup claude code user settings
+echo "${BOLD}Creating system link $(pwd)/claude/settings.json -> ${HOMEDIR}/.claude/settings.json${NORM}"
+mkdir -p ${HOMEDIR}/.claude
+ln -sf $(pwd)/claude/settings.json ${HOMEDIR}/.claude/settings.json
+echo "${GREEN}Successfully created system link${NORM}"
