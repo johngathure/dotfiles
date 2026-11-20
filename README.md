@@ -41,4 +41,4 @@ Machine-specific extras (plugins, marketplaces) go in a file that is **not** in 
 
 The `claude` wrapper in `zsh/zshrc` passes whichever one exists with `--settings`, so it loads on top of the shared settings. Work wins if both exist; with neither, plain `claude` runs. Use `command claude` to skip the extras.
 
-Note: settings changed inside Claude Code (`/model`, effort, `/plugin install`) are saved to `~/.claude/settings.json`, i.e. this repo. Move machine-specific ones to the extras file.
+Note: settings changed inside Claude Code (`/model`, effort, `/plugin install`) are saved to `~/.claude/settings.json`, i.e. this repo. `claude/hooks/settings-drift.sh` runs on session start, after each turn and on config changes, and warns (in Claude and as a macOS notification) when that file differs from the last commit in anything other than UI preferences (model, effort, thinking, fast mode, output style, renderer, theme and similar; the list is in the script). Move machine-specific changes to the extras file, or commit them.

@@ -38,6 +38,30 @@
           {
             "type": "command",
             "command": "[ -z \"$TMUX_PANE\" ] || tmux rename-window -t \"$TMUX_PANE\" '✅ claude'"
+          },
+          {
+            "type": "command",
+            "command": "h=\"$(dirname \"$(readlink -f \"$HOME/.claude/settings.json\")\")/hooks/settings-drift.sh\"; [ ! -f \"$h\" ] || sh \"$h\""
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "h=\"$(dirname \"$(readlink -f \"$HOME/.claude/settings.json\")\")/hooks/settings-drift.sh\"; [ ! -f \"$h\" ] || sh \"$h\""
+          }
+        ]
+      }
+    ],
+    "ConfigChange": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "h=\"$(dirname \"$(readlink -f \"$HOME/.claude/settings.json\")\")/hooks/settings-drift.sh\"; [ ! -f \"$h\" ] || sh \"$h\""
           }
         ]
       }
