@@ -1,0 +1,15 @@
+# Shared zsh config, sourced from ~/.zshrc (setup.sh adds the source line).
+# Machine-specific settings stay in ~/.zshrc.
+
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+alias d='docker'
+alias dc='docker compose'
+alias g='git'
+alias lg='lazygit'
+
+# claude code: load work-only settings (plugins, marketplaces) when this machine has them
+if [ -f "$HOME/.claude/settings.work.json" ]; then
+  claude() { command claude --settings "$HOME/.claude/settings.work.json" "$@"; }
+fi

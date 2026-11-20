@@ -69,7 +69,27 @@ ln -sf "${DOTFILES}/homebrew/Brewfile" "${HOMEDIR}/.Brewfile"
 echo "${GREEN}Successfully created system link${NORM}"
 
 # setup claude code user settings
-echo "${BOLD}Creating system link ${DOTFILES}/claude/settings.json -> ${HOMEDIR}/.claude/settings.json${NORM}"
+CLAUDE_TARGET="${HOMEDIR}/.claude/settings.json"
 mkdir -p "${HOMEDIR}/.claude"
-ln -sf "${DOTFILES}/claude/settings.json" "${HOMEDIR}/.claude/settings.json"
+# Keep an existing real settings file instead of overwriting it.
+if [ -e "$CLAUDE_TARGET" ] && [ ! -L "$CLAUDE_TARGET" ]
+then
+    BACKUP="${CLAUDE_TARGET}.bak.$(date +%Y%m%d%H%M%S)"
+    echo "${BOLD}Backing up existing ${CLAUDE_TARGET} -> ${BACKUP}${NORM}"
+    mv "$CLAUDE_TARGET" "$BACKUP"
+fi
+echo "${BOLD}Creating system link ${DOTFILES}/claude/settings.json -> ${CLAUDE_TARGET}${NORM}"
+ln -sf "${DOTFILES}/claude/settings.json" "$CLAUDE_TARGET"
 echo "${GREEN}Successfully created system link${NORM}"
+
+# setup shared zsh config: ~/.zshrc stays machine-local and sources zsh/zshrc
+ZSH_SHARED="${DOTFILES}/zsh/zshrc"
+touch "${HOMEDIR}/.zshrc"
+if grep -qF "$ZSH_SHARED" "${HOMEDIR}/.zshrc"
+then
+    echo "${BOLD}${HOMEDIR}/.zshrc already sources ${ZSH_SHARED}${NORM}"
+else
+    echo "${BOLD}Adding source ${ZSH_SHARED} to ${HOMEDIR}/.zshrc${NORM}"
+    printf '\n# shared zsh config from dotfiles\n[ -f "%s" ] && source "%s"\n' "$ZSH_SHARED" "$ZSH_SHARED" >> "${HOMEDIR}/.zshrc"
+    echo "${GREEN}Successfully added source line${NORM}"
+fi
