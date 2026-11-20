@@ -9,7 +9,16 @@ alias dc='docker compose'
 alias g='git'
 alias lg='lazygit'
 
-# claude code: load work-only settings (plugins, marketplaces) when this machine has them
-if [ -f "$HOME/.claude/settings.work.json" ]; then
-  claude() { command claude --settings "$HOME/.claude/settings.work.json" "$@"; }
-fi
+# claude code: layer this machine's extra settings on top of ~/.claude/settings.json.
+# Work machines keep ~/.claude/settings.work.json, personal ones settings.personal.json
+# (neither is in dotfiles). Work wins if both exist; with neither, plain claude runs.
+claude() {
+  local f
+  for f in "$HOME/.claude/settings.work.json" "$HOME/.claude/settings.personal.json"; do
+    if [ -f "$f" ]; then
+      command claude --settings "$f" "$@"
+      return
+    fi
+  done
+  command claude "$@"
+}
